@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using Entities.Concrete;
 
@@ -12,5 +13,10 @@ namespace Business.Abstract
         void Add(Car car);
         void Delete(Car car);
         void Update(Car car);
+        List<Car> GetCarsByBrandId(int Id);
+        List<Car> GetCarsByColorId(int Id);
+
+        
     }
+     
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
-namespace DataAccess.Concrete
+namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCarDal : ICarDal
     {
@@ -22,7 +22,18 @@ namespace DataAccess.Concrete
 
             };
         }
-        
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+
+            return _cars.SingleOrDefault(filter.Compile());
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            return filter == null ? _cars.ToList() : _cars.Where(filter.Compile()).ToList();
+        }
+
         public void Add(Car car)
         {
             _cars.Add(car);
@@ -35,16 +46,6 @@ namespace DataAccess.Concrete
             _cars.Remove(_cars.SingleOrDefault(c => c.Id == car.Id));
             Console.WriteLine(car.BrandId.ToString() + " marka Id'li araba sistemden silindi");
 
-        }
-
-        public List<Car> GetAll()
-        {
-            return _cars;
-        }
-
-        public Car GetById(int Id)
-        {
-            return _cars.SingleOrDefault(c => c.Id == Id);
         }
 
         public void Update(Car car)
