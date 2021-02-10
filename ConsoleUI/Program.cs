@@ -18,6 +18,13 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
+            foreach (var carDetailDto in _efCarService.GetCarDetails())
+            {
+                Console.WriteLine("******ARAÇ DETAY******");
+                Console.WriteLine("Car Id : {0}\nCar Name : {1}\nCar Brand : {2}\nCar Color : {3}", carDetailDto.Id,carDetailDto.Name,carDetailDto.BrandName,carDetailDto.ColorName);
+            }
+            
+
             //GetCarsByColorId();
             //GetCarsByBrandId();
             //GetById();
@@ -61,13 +68,13 @@ namespace ConsoleUI
         {
             _efCarService.Update(new Car
             {
-                Id = 3,
+                Id = 2002,
                 BrandId = 1,
                 ColorId = 1,
                 DailyPrice = 2500,
                 Name = "Polo",
                 ModelYear = 2019,
-                Description = "Otomatik"
+                Description = "Manual"
             });
         }
 
@@ -75,20 +82,27 @@ namespace ConsoleUI
         {
             _efCarService.Delete(new Car
             {
-                Id = 3,
+                Id = 2002,
                 BrandId = 1,
                 ColorId = 1,
                 DailyPrice = 2500,
                 Name = "Polo",
                 ModelYear = 2019,
-                Description = "Otomatik"
+                Description = "Manual"
             });
         }
 
         private static void Add()
         {
             _efCarService.Add(new Car
-            { BrandId = 1, ColorId = 1, DailyPrice = 2500, Name = "Polo", ModelYear = 2019, Description = "Otomatik" });
+            {
+                BrandId = 1,
+                ColorId = 1, 
+                DailyPrice = 2500,
+                Name = "Polo",
+                ModelYear = 2019,
+                Description = "Otomatik"
+            });
         }
 
         private static void AddWithException()
