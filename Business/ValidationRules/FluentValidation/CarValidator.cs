@@ -10,8 +10,8 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CarValidator()
         {
-            RuleFor(c => c.Name.Length).GreaterThanOrEqualTo(2).WithMessage("{MinLength}");
-            RuleFor(c => c.DailyPrice).GreaterThan((decimal)0);
+            RuleFor(c => c.Name.Length).GreaterThanOrEqualTo(2).WithMessage("Araç isim en az 2 karakter içermelidir");
+            RuleFor(c => c.DailyPrice).GreaterThan((decimal)0).WithMessage("Kira ücreti 0 dan büyük olmalıdır");
 
         }
     }

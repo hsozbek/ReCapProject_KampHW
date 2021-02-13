@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
 using Business.Utilities;
 using Business.ValidationRules.FluentValidation;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -17,79 +20,74 @@ namespace Business.Concrete
         private ICarDal _carDal;
         private IValidator<Car> _validator;
 
-        public CarManager(ICarDal carDal,IValidator<Car> validator)
+        public CarManager(ICarDal carDal, IValidator<Car> validator)
         {
             _carDal = carDal;
             _validator = validator;
         }
 
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
-            try
+            var errors = ValidationTool.Validate(_validator, car);
+            var cnt = errors.Count();
+            if (cnt > 0)
             {
-                ValidationTool.Validate(_validator, car);
-                _carDal.Add(car);
-                Console.WriteLine("{0} Added", car.Name);
+                return new ErrorResult(string.Join("\n", errors));
             }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-              
-            }
-            
-            
-
-
+            _carDal.Add(car);
+            return new SuccessResult(Messages.Car.Added);
+            Console.WriteLine("{0} Added", car.Name);
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
+
             _carDal.Delete(car);
-            Console.WriteLine("{0} Deleted", car.Name);
+            return new SuccessResult(Messages.Car.Deleted);
+
         }
 
-       
 
-        public List<Car> GetAll()
+
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.Car.GetAll);
         }
 
-        public Car GetById(int Id)
+        public IDataResult<Car> GetById(int Id)
         {
-            return _carDal.Get(c => c.Id == Id);
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == Id),Messages.Car.GetById);
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),Messages.Car.Details);
         }
 
-        public List<Car> GetCarsByBrandId(int Id)
+        public IDataResult<List<Car>> GetCarsByBrandId(int Id)
         {
-            return _carDal.GetAll(c => c.BrandId== Id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == Id),
+                Messages.Car.GetAll);
         }
 
-        public List<Car> GetCarsByColorId(int Id)
+        public IDataResult<List<Car>> GetCarsByColorId(int Id)
         {
-            return _carDal.GetAll(c => c.ColorId == Id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == Id),
+                Messages.Car.GetAll); 
         }
 
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
-            try
+            var errors = ValidationTool.Validate(_validator, car);
+            if (errors.Count()>0)
             {
-                ValidationTool.Validate(_validator,car);
-                _carDal.Update(car);
-                Console.WriteLine("{0} Updated", car.Name);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                return new ErrorResult(string.Join("\n", errors));
             }
             
+            
+            _carDal.Update(car);
+            return new SuccessResult(Messages.Car.Updated);
         }
 
     }

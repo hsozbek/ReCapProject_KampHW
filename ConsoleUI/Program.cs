@@ -14,17 +14,13 @@ namespace ConsoleUI
     class Program
     {
         static ICarService _efCarService = new CarManager(new EfCarDal(), new CarValidator());
-
+        static ICustomerService _customerService = new CustomerManager(new EfCustomerDal());
 
         static void Main(string[] args)
         {
-            foreach (var carDetailDto in _efCarService.GetCarDetails())
-            {
-                Console.WriteLine("******ARAÇ DETAY******");
-                Console.WriteLine("Car Id : {0}\nCar Name : {1}\nCar Brand : {2}\nCar Color : {3}", carDetailDto.Id,carDetailDto.Name,carDetailDto.BrandName,carDetailDto.ColorName);
-            }
-            
+            AddRentalTest();
 
+            //GetCarDetails();
             //GetCarsByColorId();
             //GetCarsByBrandId();
             //GetById();
@@ -35,9 +31,27 @@ namespace ConsoleUI
             //AddWithException();
         }
 
+        private static void AddRentalTest()
+        {
+            IRentalService _rentalService = new RentalManager(new EfRentalDal(), new RentalValidator());
+
+            var result = _rentalService.Add(new Rental {CarId = 5, CustomerId = 1, RentDate = new DateTime(2021, 02, 13)});
+            Console.WriteLine(result.Message);
+        }
+
+        private static void GetCarDetails()
+        {
+            foreach (var carDetailDto in _efCarService.GetCarDetails().Data)
+            {
+                Console.WriteLine("******ARAÇ DETAY******");
+                Console.WriteLine("Car Id : {0}\nCar Name : {1}\nCar Brand : {2}\nCar Color : {3}", carDetailDto.Id,
+                    carDetailDto.Name, carDetailDto.BrandName, carDetailDto.ColorName);
+            }
+        }
+
         private static void GetCarsByColorId()
         {
-            foreach (Car car in _efCarService.GetCarsByColorId(1))
+            foreach (Car car in _efCarService.GetCarsByColorId(1).Data)
             {
                 Console.WriteLine(car.Name);
             }
@@ -45,7 +59,7 @@ namespace ConsoleUI
 
         private static void GetCarsByBrandId()
         {
-            foreach (Car car in _efCarService.GetCarsByBrandId(1))
+            foreach (Car car in _efCarService.GetCarsByBrandId(1).Data)
             {
                 Console.WriteLine(car.Name);
             }
@@ -53,12 +67,12 @@ namespace ConsoleUI
 
         private static void GetById()
         {
-            Console.WriteLine(_efCarService.GetById(1).Name);
+            Console.WriteLine(_efCarService.GetById(1).Data.Name);
         }
 
         private static void GetAll()
         {
-            foreach (Car car in _efCarService.GetAll())
+            foreach (Car car in _efCarService.GetAll().Data)
             {
                 Console.WriteLine(car.Name);
             }
@@ -107,7 +121,8 @@ namespace ConsoleUI
 
         private static void AddWithException()
         {
-            _efCarService.Add(new Car { Name = "a" });
+           var result=_efCarService.Add(new Car { Name = "d" });
+           Console.WriteLine(result.Message);
         }
     }
 }
