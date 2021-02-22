@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
-using Business.Utilities;
 using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,26 +18,23 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         private ICarDal _carDal;
-        private IValidator<Car> _validator;
+       
 
-        public CarManager(ICarDal carDal, IValidator<Car> validator)
+        public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
-            _validator = validator;
+            
         }
 
 
         public IResult Add(Car car)
         {
-            var errors = ValidationTool.Validate(_validator, car);
-            var cnt = errors.Count();
-            if (cnt > 0)
-            {
-                return new ErrorResult(string.Join("\n", errors));
-            }
+            
+            ValidationTool.Validate(new CarValidator(),car);
+            
             _carDal.Add(car);
             return new SuccessResult(Messages.Car.Added);
-            Console.WriteLine("{0} Added", car.Name);
+            
         }
 
         public IResult Delete(Car car)
@@ -79,13 +76,9 @@ namespace Business.Concrete
 
         public IResult Update(Car car)
         {
-            var errors = ValidationTool.Validate(_validator, car);
-            if (errors.Count()>0)
-            {
-                return new ErrorResult(string.Join("\n", errors));
-            }
-            
-            
+
+
+            ValidationTool.Validate(new CarValidator(), car);
             _carDal.Update(car);
             return new SuccessResult(Messages.Car.Updated);
         }

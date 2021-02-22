@@ -13,7 +13,7 @@ namespace ConsoleUI
 {
     class Program
     {
-        static ICarService _efCarService = new CarManager(new EfCarDal(), new CarValidator());
+        static ICarService _efCarService = new CarManager(new EfCarDal());
         static ICustomerService _customerService = new CustomerManager(new EfCustomerDal());
 
         static void Main(string[] args)
@@ -33,7 +33,7 @@ namespace ConsoleUI
 
         private static void AddRentalTest()
         {
-            IRentalService _rentalService = new RentalManager(new EfRentalDal(), new RentalValidator());
+            IRentalService _rentalService = new RentalManager(new EfRentalDal());
 
             var result = _rentalService.Add(new Rental {CarId = 5, CustomerId = 1, RentDate = new DateTime(2021, 02, 13)});
             Console.WriteLine(result.Message);

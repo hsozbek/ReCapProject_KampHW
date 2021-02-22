@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "r0D7taEYl4Jmi0yoOrSHVdB56xTZUIfPHDorGGuis9HCRS1dg3X5OCv3stbpYkMRQmQkzlyfYnRzaerja7GyMA==",
+  "dgSpecHash": "qhzjpzQcoSgFScNHfS6GgeH6HShL/zJ6AzINzplUPZTGHhLAVCLrYNvn+qvF8BStQCG2XK4H+wZGT7nAYPTkUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hselc\\source\\repos\\ReCapProject\\Entities\\Entities.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\hselc\\.nuget\\packages\\fluentvalidation\\9.5.0\\fluentvalidation.9.5.0.nupkg.sha512",
     "C:\\Users\\hselc\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\hselc\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",
     "C:\\Users\\hselc\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
