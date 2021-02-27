@@ -71,3 +71,5 @@ C:\Users\hselc\source\repos\ReCapProject\WebApi\bin\Debug\netcoreapp3.1\Autofac.
 C:\Users\hselc\source\repos\ReCapProject\WebApi\bin\Debug\netcoreapp3.1\Autofac.Extensions.DependencyInjection.dll
 C:\Users\hselc\source\repos\ReCapProject\WebApi\bin\Debug\netcoreapp3.1\Autofac.Extras.DynamicProxy.dll
 C:\Users\hselc\source\repos\ReCapProject\WebApi\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\hselc\source\repos\ReCapProject\WebApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\hselc\source\repos\ReCapProject\WebApi\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll

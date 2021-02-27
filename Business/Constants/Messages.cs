@@ -6,6 +6,8 @@ namespace Business.Constants
 {
     public static class Messages
     {
+        
+
         public static class Brand
         {
             public static readonly string Added = "Marka eklendi";
@@ -60,6 +62,16 @@ namespace Business.Constants
             public static readonly string GetAll = "Kullanıcı Listelendi";
             public static readonly string GetById = "Kullanıcı getirildi";
             public static readonly string Updated = "Kullanıcı güncellendi";
+        }
+
+
+        public static class CarImage
+        {
+            public static readonly string Added = "Araç görseli eklendi";
+            public static readonly string Deleted = "Araç görseli silindi";
+            public static readonly string GetAll = "Araç görseli Listelendi";
+            public static readonly string GetById = "Araç görseli getirildi";
+            public static readonly string Updated = "Araç görseli güncellendi";
         }
     }
 }
