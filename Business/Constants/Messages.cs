@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
 {
     public static class Messages
     {
-        
+        public static readonly string AuthorizationDenied="Yetkiniz yok";
 
         public static class Brand
         {
@@ -62,6 +63,12 @@ namespace Business.Constants
             public static readonly string GetAll = "Kullanıcı Listelendi";
             public static readonly string GetById = "Kullanıcı getirildi";
             public static readonly string Updated = "Kullanıcı güncellendi";
+            public static readonly string UserNotFound="Kullanıcı bulunamadı";
+            public static readonly string PasswordError="Parola hatalı";
+            public static readonly string SuccessfulLogin="Giriş başarılı";
+            public static readonly string UserAlreadyExists="Kullanıcı zaten var";
+            public static readonly string UserRegistered="Kullanıcı oluşturuldu";
+            public static readonly string AccessTokenCreated="Access Token başarıyla oluşturuldu";
         }
 
 
